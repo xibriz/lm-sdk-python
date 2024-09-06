@@ -18272,6 +18272,40 @@
                     "properties": {}
                 }
             ]
+        },
+        "ClusterAlertConf": {
+            "type": "object",
+            "required": [
+                "minAlertLevel",
+                "thresholdType",
+                "countBy",
+                "dataSourceId",
+                "dataPointId",
+                "alertExpr"
+            ],
+            "properties": {
+                "minAlertLevel": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "thresholdType": {
+                    "type": "string"
+                },
+                "countBy": {
+                    "type": "string"
+                },
+                "dataSourceId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "dataPointId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "alertExpr": {
+                    "type": "string"
+                }
+            }
         }
     },
     "externalDocs": {
@@ -18487,6 +18521,57 @@
                 ],
                 "tags": [
                     "Device Groups"
+                ]
+            }
+        },
+        "/device/groups/{id}/clusterAlertConf": {
+            "post": {
+                "summary": "add a cluster alert",
+                "security": [
+                    {
+                        "LMv1": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "addDeviceGroupClusterAlert",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "successful operation"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "groupId",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": false
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ClusterAlertConf"
+                        },
+                        "in": "body",
+                        "name": "body",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                ],
+                "consumes": [
+                    "application/json"
                 ]
             }
         },
